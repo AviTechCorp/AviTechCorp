@@ -1,0 +1,187 @@
+*{
+    margin: 0; padding: 0; 
+    box-sizing: border-box;
+    font-family: arial, helvetica, sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header .logo{
+    font-weight: 600;
+    font-size: 25px;
+    margin-top: 10px;
+    color: #f48d43;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.team-list{
+    list-style: none;
+}
+
+.team-list li{
+    float: left;
+    width: 30%;
+    margin: 0px 1.5%;
+    text-align: center;
+    color: #fff;
+}
+
+.content .expertise-list{
+    list-style: none;
+}
+
+.content .expertise-list li h4{
+    font-size: 15px;
+    color: #5779f5;
+    margin-top: 15px;
+}
+
+.content .expertise-list li{
+    font-size: 15px;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.section{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(https://yi-files.yellowimages.com/products/1719000/1719883/2753266-full.jpg);
+}
+
+.container{
+    width: 80%;
+    display: block;
+    margin: auto;
+    padding-top: 100px;
+}
+
+.content-section{
+    float: left;
+    width: 55%;
+}
+
+.image-section{
+    float: right;
+    width: 40%;
+}
+
+.image-section img{
+    width: 100%;
+    height: auto;
+}
+
+.content-section .title{
+    text-transform: uppercase;
+    font-size: 28px;
+    color: #f48d43;
+}
+
+.content-section .title h1{
+    font-size: 30px;
+    color: #f48d43;
+}
+
+.content-section .title p{
+    font-size: 15px;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.content-section .content h4{
+    margin-top: 15px;
+    color: #f48d43;
+    font-size: 19px;
+}
+
+.content-section .content p{
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+}
+
+.content-section .content .button a{
+    padding: 20px 15px;
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    float: right;
+}
+
+.content-section .content .button a:hover{
+    color:white;
+}
+
+.content-section .secial{
+    margin-top: 40px;
+}
+
+.content-section .social i{
+    color: #7f7f7f;
+    font-size: 30px;
+    padding: 15px 10px;
+}
+
+.content-section .social i:hover{
+    color: blue;
+}
+
+
+
+
+@media screen and (max-width: 768px){
+    .container{
+        width: 80%;
+        display: block;
+        margin: auto;
+        padding-top: 100px;
+    }
+    .content-section{
+        width: 100%;
+        float: none;
+        display: block;
+        margin: auto;
+    }
+    .image-section{
+        width: 100%;
+        float: none;
+    }
+    .image-section img{
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+    .content-section .title{
+        text-align: center;
+        font-size: 19px;
+    }
+    .content-section .content .button{
+        text-align: center;
+    }
+    .content-section .content .button a{
+        padding: 9px 30px;
+    }
+    .content-section .social{
+        text-align: center;
+    }
+    
+}
+
+
