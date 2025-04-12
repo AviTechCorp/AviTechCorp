@@ -5,29 +5,35 @@
   <title>Charts</title>
   <script src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
   <link rel="stylesheet" href="chart.css">
-</head>
-<body>
-  <header>
-    <a href="index.html" class="logo"><h4>AviTech</h4></a>
-    <h5>BINANCE CHARTS</h5>
-  </header>
-  <div class="chart-container">
-    <div id="tvchart" style="width: 100%; height: 100%;"></div>
-    <div class="dropdown-container">
-      <button class="dropdown-button" id="dropdown-button">Select Interval</button>
-      <div class="dropdown-menu" id="dropdown-menu">
-        <button id="1m-button">1 minute</button>
-        <button id="3m-button">3 minutes</button>
-        <button id="5m-button">5 minutes</button>
-        <button id="15m-button">15 minutes</button>
-        <button id="30m-button">30 minutes</button>
-        <button id="1h-button">1 hour</button>
-        <button id="2h-button">2 hours</button>
-        <button id="4h-button">4 hours</button>
-        <button id="1d-button">1 day</button>
+  <body>
+    <header>
+      <a href="index.html" class="logo"><h4>AviTech</h4></a>
+      <h5>BINANCE CHARTS</h5>
+    </header>
+    <div class="chart-container">
+      <div id="tvchart" style="width: 100%; height: 100%;"></div>
+      <div class="controls-container">
+        <div class="search-container">
+          <input type="text" id="pair-input" placeholder="Enter pair (e.g. BTCUSDT)">
+          <button id="search-button">Search</button>
+        </div>
+        <div class="dropdown-container">
+          <button class="dropdown-button" id="dropdown-button">TimeFrames</button>
+          <div class="dropdown-menu" id="dropdown-menu">
+            <button id="1m-button">1 minute</button>
+            <button id="3m-button">3 minutes</button>
+            <button id="5m-button">5 minutes</button>
+            <button id="15m-button">15 minutes</button>
+            <button id="30m-button">30 minutes</button>
+            <button id="1h-button">1 hour</button>
+            <button id="2h-button">2 hours</button>
+            <button id="4h-button">4 hours</button>
+            <button id="1d-button">1 day</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</body>
-<script type="text/javascript" src="index.js"></script>
-</html>
+  </body>
+  <script type="text/javascript" src="index.js"></script>
+  </html>
+    

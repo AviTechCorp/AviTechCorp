@@ -81,11 +81,32 @@ h5{
     width: 100%;
     height: 600px;
   }
-  .dropdown-container {
+  .controls-container {
     position: absolute;
     top: 10px;
     left: 10px;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  #pair-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  #search-button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f48d43;
+    color: white;
+    cursor: pointer;
   }
   .dropdown-button {
     padding: 10px;
@@ -101,7 +122,6 @@ h5{
     top: 40px;
     left: 0;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
   }
   .dropdown-menu button {
@@ -111,10 +131,7 @@ h5{
     border: none;
     color: black;
     cursor: pointer;
-    width: 100%;
   }
   .show {
     display: block;
   }
-
-  

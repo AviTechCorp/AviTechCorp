@@ -12,10 +12,16 @@ const series = chart.addCandlestickSeries({
   wickDownColor: '#ef5350',
 });
 
-const fetchData = (interval) => {
-  fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${interval}&limit=1000`)
+let currentPair = 'BTCUSDT';
+let currentInterval = '1m';
+const fetchData = (pair = currentPair, interval = currentInterval) => {
+  fetch(`https://api.binance.com/api/v3/klines?symbol=${pair}&interval=${interval}&limit=1000`)
     .then(response => response.json())
     .then(data => {
+      if (data.code) {
+        alert('Invalid pair or interval');
+        return;
+      }
       const chartData = data.map(candle => ({
         time: candle[0] / 1000,
         open: parseFloat(candle[1]),
@@ -31,41 +37,64 @@ document.getElementById('dropdown-button').addEventListener('click', () => {
 });
 
 document.getElementById('1m-button').addEventListener('click', () => {
-  fetchData('1m');
+  currentInterval = '1m';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('3m-button').addEventListener('click', () => {
-  fetchData('3m');
+  currentInterval = '3m';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('5m-button').addEventListener('click', () => {
-  fetchData('5m');
+  currentInterval = '5m';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('15m-button').addEventListener('click', () => {
-  fetchData('15m');
+  currentInterval = '15m';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('30m-button').addEventListener('click', () => {
-  fetchData('30m');
+  currentInterval = '30m';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('1h-button').addEventListener('click', () => {
-  fetchData('1h');
+  currentInterval = '1h';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('2h-button').addEventListener('click', () => {
-  fetchData('2h');
+  currentInterval = '2h';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('4h-button').addEventListener('click', () => {
-  fetchData('4h');
+  currentInterval = '4h';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
 document.getElementById('1d-button').addEventListener('click', () => {
-  fetchData('1d');
+  currentInterval = '1d';
+  fetchData();
   document.getElementById('dropdown-menu').classList.remove('show');
 });
+
+const search = () => {
+  currentPair = document.getElementById('pair-input').value.toUpperCase();
+  fetchData();
+};
+
+document.getElementById('search-button').addEventListener('click', search);
+document.getElementById('pair-input').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    search();
+  }
+});
+
+
 window.addEventListener('click', (e) => {
   if (!e.target.matches('.dropdown-button') && !e.target.matches('.dropdown-button *')) {
     const dropdownMenu = document.getElementById('dropdown-menu');
@@ -74,8 +103,7 @@ window.addEventListener('click', (e) => {
     }
   }
 });
-
-fetchData('1m');
+fetchData();
 
 window.addEventListener('resize', () => {
   chart.resize(chartContainer.offsetWidth, chartContainer.offsetHeight);
