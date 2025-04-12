@@ -26,18 +26,57 @@ const fetchData = (interval) => {
       series.setData(chartData);
     });
 };
-document.getElementById('1m-button').addEventListener('click', () => fetchData('1m'));
-document.getElementById('3m-button').addEventListener('click', () => fetchData('3m'));
-document.getElementById('5m-button').addEventListener('click', () => fetchData('5m'));
-document.getElementById('15m-button').addEventListener('click', () => fetchData('15m'));
-document.getElementById('30m-button').addEventListener('click', () => fetchData('30m'));
-document.getElementById('1h-button').addEventListener('click', () => fetchData('1h'));
-document.getElementById('2h-button').addEventListener('click', () => fetchData('2h'));
-document.getElementById('4h-button').addEventListener('click', () => fetchData('4h'));
-document.getElementById('1d-button').addEventListener('click', () => fetchData('1d'));
+document.getElementById('dropdown-button').addEventListener('click', () => {
+  document.getElementById('dropdown-menu').classList.toggle('show');
+});
+
+document.getElementById('1m-button').addEventListener('click', () => {
+  fetchData('1m');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('3m-button').addEventListener('click', () => {
+  fetchData('3m');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('5m-button').addEventListener('click', () => {
+  fetchData('5m');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('15m-button').addEventListener('click', () => {
+  fetchData('15m');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('30m-button').addEventListener('click', () => {
+  fetchData('30m');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('1h-button').addEventListener('click', () => {
+  fetchData('1h');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('2h-button').addEventListener('click', () => {
+  fetchData('2h');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('4h-button').addEventListener('click', () => {
+  fetchData('4h');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+document.getElementById('1d-button').addEventListener('click', () => {
+  fetchData('1d');
+  document.getElementById('dropdown-menu').classList.remove('show');
+});
+window.addEventListener('click', (e) => {
+  if (!e.target.matches('.dropdown-button') && !e.target.matches('.dropdown-button *')) {
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    if (dropdownMenu.classList.contains('show')) {
+      dropdownMenu.classList.remove('show');
+    }
+  }
+});
+
 fetchData('1m');
 
 window.addEventListener('resize', () => {
   chart.resize(chartContainer.offsetWidth, chartContainer.offsetHeight);
 });
-
