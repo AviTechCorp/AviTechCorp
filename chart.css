@@ -1,0 +1,106 @@
+*{
+    margin: 0; padding: 0; 
+    box-sizing: border-box;
+    font-family: arial, helvetica, sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+
+h4{
+    font-size: 2rem;
+    font-weight: 600;
+    color: #f48d43;
+}
+
+h5{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: black;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+
+
+
+@media(max-width:991px){
+    header{
+        padding: 20px;
+    }
+
+    header label{
+        display: initial;
+    }
+
+    header .navbar{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: #f48d43;
+        border-top: 1px solid rgba(0,0,0,.1);
+        display: none;
+    }
+
+    header .navbar ul li{
+        width: 100%;
+    }
+
+    header .navbar ul li ul{
+        position: relative;
+        width: 100%;
+    }
+
+    header .navbar ul li ul li{
+        background: #f48d43;
+    }
+
+    header .navbar ul li ul li ul{
+        width: 100%;
+        left: 0;
+    }
+
+    #menu-bar:checked ~ .navbar{
+        display: initial;
+    }
+}
+
+
+#tvchart {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100vh;
+    margin: 0 auto;
+    position: relative;
+  }
+
+
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+  }
+  
+  .interval-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: row;
+    z-index: 1000; /* Increased z-index to ensure buttons are on top */
+    pointer-events: auto; /* Ensure pointer events are enabled */
+  }
+  
+  .interval-button {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: black;
+    color: white;
+    cursor: pointer; /* Add cursor pointer to indicate clickability */
+  }
+  
+
+  
