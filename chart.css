@@ -122,7 +122,6 @@ h5{
     top: 40px;
     left: 0;
     padding: 10px;
-    border-radius: 5px;
   }
   .dropdown-menu button {
     margin-bottom: 10px;
@@ -134,4 +133,13 @@ h5{
   }
   .show {
     display: block;
+  }
+  #replay-button {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f48d43;
+    color: white;
+    cursor: pointer;
   }
