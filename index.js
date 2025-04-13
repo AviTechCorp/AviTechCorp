@@ -37,6 +37,7 @@ const fetchData = (pair = currentPair, interval = currentInterval) => {
 
 let currentReplayIndex = 0;
 let isPlaying = false;
+let replaySpeed = 1;
 
 const replay = () => {
   const replayContainer = document.getElementById('replay-container');
@@ -93,7 +94,7 @@ const replayLoop = () => {
     series.setData(chartData.slice(0, currentReplayIndex + 1));
     currentReplayIndex++;
     if (isReplay) {
-      setTimeout(replayLoop, 100);
+      setTimeout(replayLoop, 100 / replaySpeed);
     }
   } else {
     isReplay = false;
@@ -104,6 +105,70 @@ const replayLoop = () => {
     }
   }
 };
+
+let position = null;
+let entryPrice = null;
+
+document.getElementById('buy-button').addEventListener('click', () => {
+  if (position !== 'long') {
+    position = 'long';
+    entryPrice = chartData[currentReplayIndex].close;
+    document.getElementById('position-label').innerText = `Position: Long`;
+    console.log(`Buy at ${chartData[currentReplayIndex].close}`);
+  }
+});
+
+document.getElementById('sell-button').addEventListener('click', () => {
+  if (position !== 'short') {
+    position = 'short';
+    entryPrice = chartData[currentReplayIndex].close;
+    document.getElementById('position-label').innerText = `Position: Short`;
+    console.log(`Sell at ${chartData[currentReplayIndex].close}`);
+  }
+});
+
+document.getElementById('close-button').addEventListener('click', () => {
+  if (position === 'long') {
+    const exitPrice = chartData[currentReplayIndex].close;
+    const profitLoss = exitPrice - entryPrice;
+    document.getElementById('position-label').innerText = `Profit/Loss: ${profitLoss.toFixed(2)}`;
+    if (profitLoss > 0) {
+      document.getElementById('position-label').style.color = 'green';
+    } else {
+      document.getElementById('position-label').style.color = 'red';
+    }
+    console.log(`Closed long position at ${chartData[currentReplayIndex].close}`);
+    console.log(`Profit/Loss: ${profitLoss.toFixed(2)}`);
+    position = null;
+    entryPrice = null;
+  } else if (position === 'short') {
+    const exitPrice = chartData[currentReplayIndex].close;
+    const profitLoss = entryPrice - exitPrice;
+    document.getElementById('position-label').innerText = `Profit/Loss: ${profitLoss.toFixed(2)}`;
+    if (profitLoss > 0) {
+      document.getElementById('position-label').style.color = 'green';
+    } else {
+      document.getElementById('position-label').style.color = 'red';
+    }
+    console.log(`Closed short position at ${chartData[currentReplayIndex].close}`);
+    console.log(`Profit/Loss: ${profitLoss.toFixed(2)}`);
+    position = null;
+    entryPrice = null;
+  } else {
+    console.log('No open position to close');
+  }
+});
+
+
+document.getElementById('speed-down-button').addEventListener('click', () => {
+  replaySpeed = Math.max(replaySpeed - 0.5, 0.5);
+  document.getElementById('speed-label').innerText = `Speed: ${replaySpeed}x`;
+});
+
+document.getElementById('speed-up-button').addEventListener('click', () => {
+  replaySpeed = replaySpeed + 0.5;
+  document.getElementById('speed-label').innerText = `Speed: ${replaySpeed}x`;
+});
 
 document.getElementById('reset-replay-button').addEventListener('click', () => {
   isReplay = false;

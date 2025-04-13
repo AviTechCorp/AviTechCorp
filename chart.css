@@ -143,3 +143,61 @@ h5{
     color: white;
     cursor: pointer;
   }
+
+  
+
+  #replay-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  #replay-container button:hover {
+    background-color: #ccc;
+  }
+  
+  #buy-button {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  #buy-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  #sell-button {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  #sell-button:hover {
+    background-color: #e91e63;
+  }
+
+  #close-button {
+    background-color: #2196F3;
+    color: #fff;
+  }
+  
+  #close-button:hover {
+    background-color: #1976D2;
+  }
+  
+  #start-replay-button, #reset-replay-button {
+    background-color: #9E9E9E;
+    color: #fff;
+  }
+  
+  #start-replay-button:hover, #reset-replay-button:hover {
+    background-color: #757575;
+  }
+  
+  #speed-down-button, #speed-up-button {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+    
