@@ -3,7 +3,6 @@ const chart = LightweightCharts.createChart(chartContainer, {
   width: chartContainer.offsetWidth,
   height: chartContainer.offsetHeight,
 });
-
 const series = chart.addCandlestickSeries({
   upColor: '#26a69a',
   downColor: '#ef5350',
@@ -11,12 +10,12 @@ const series = chart.addCandlestickSeries({
   wickUpColor: '#26a69a',
   wickDownColor: '#ef5350',
 });
-
 let currentPair = 'BTCUSDT';
 let currentInterval = '1m';
 let isReplay = false;
 let replayIndex = 0;
 let chartData = [];
+
 const fetchData = (pair = currentPair, interval = currentInterval) => {
   fetch(`https://api.binance.com/api/v3/klines?symbol=${pair}&interval=${interval}&limit=1000`)
     .then(response => response.json())
@@ -36,28 +35,87 @@ const fetchData = (pair = currentPair, interval = currentInterval) => {
     });
 };
 
+let currentReplayIndex = 0;
+let isPlaying = false;
+
 const replay = () => {
-  if (!isReplay) {
-    isReplay = true;
-    replayIndex = 0;
-    document.getElementById('replay-button').innerText = 'Stop Replay';
-    replayLoop();
+  const replayContainer = document.getElementById('replay-container');
+  if (replayContainer.style.display === 'block') {
+    replayContainer.style.display = 'none';
   } else {
-    isReplay = false;
-    document.getElementById('replay-button').innerText = 'Replay';
+    replayContainer.style.display = 'block';
+    const rangeInput = document.getElementById('replay-range');
+    rangeInput.min = 0;
+    rangeInput.max = chartData.length - 1;
+    rangeInput.value = 0;
+    const replayStartLabel = document.getElementById('replay-start-label');
+    replayStartLabel.innerText = `Start from: ${chartData[0].time}`;
+    rangeInput.addEventListener('input', () => {
+      replayStartLabel.innerText = `Start from: ${chartData[rangeInput.value].time}`;
+    });
+    let playPauseButton = document.getElementById('play-pause-button');
+    if (!playPauseButton) {
+      playPauseButton = document.createElement('button');
+      playPauseButton.id = 'play-pause-button';
+      playPauseButton.innerText = 'Play';
+      document.getElementById('replay-container').appendChild(playPauseButton);
+    }
+    playPauseButton.addEventListener('click', () => {
+      if (!isPlaying) {
+        if (currentReplayIndex === 0) {
+          currentReplayIndex = parseInt(rangeInput.value);
+        }
+        isReplay = true;
+        isPlaying = true;
+        document.getElementById('replay-button').innerText = 'Stop Replay';
+        playPauseButton.innerText = 'Pause';
+        replayLoop();
+      } else {
+        isPlaying = false;
+        isReplay = false;
+        playPauseButton.innerText = 'Play';
+      }
+    });
+    document.getElementById('start-replay-button').addEventListener('click', () => {
+      currentReplayIndex = parseInt(rangeInput.value);
+      isReplay = true;
+      isPlaying = true;
+      document.getElementById('replay-button').innerText = 'Stop Replay';
+      playPauseButton.innerText = 'Pause';
+      replayLoop();
+      replayContainer.style.display = 'none';
+    });
   }
 };
 
 const replayLoop = () => {
-  if (isReplay && replayIndex < chartData.length) {
-    series.setData(chartData.slice(0, replayIndex + 1));
-    replayIndex++;
-    setTimeout(replayLoop, 100); 
+  if (isReplay && currentReplayIndex < chartData.length) {
+    series.setData(chartData.slice(0, currentReplayIndex + 1));
+    currentReplayIndex++;
+    if (isReplay) {
+      setTimeout(replayLoop, 100);
+    }
   } else {
     isReplay = false;
     document.getElementById('replay-button').innerText = 'Replay';
+    const playPauseButton = document.getElementById('play-pause-button');
+    if (playPauseButton) {
+      playPauseButton.innerText = 'Play';
+    }
   }
 };
+
+document.getElementById('reset-replay-button').addEventListener('click', () => {
+  isReplay = false;
+  isPlaying = false;
+  currentReplayIndex = 0;
+  series.setData(chartData);
+  document.getElementById('replay-button').innerText = 'Replay';
+  const playPauseButton = document.getElementById('play-pause-button');
+  if (playPauseButton) {
+    playPauseButton.innerText = 'Play';
+  }
+});
 
 document.getElementById('replay-button').addEventListener('click', replay);
 
